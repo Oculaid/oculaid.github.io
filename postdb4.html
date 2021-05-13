@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>OculAid - Blog Post</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a  class="white" href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a  class="white" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/electricalBanner.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <!-- Update The following three lines to match what was put in the index file. -->
+                        <h1 class="white">Electronics Finalization and PCB Order</h1>
+                        <h2 class="subheading white">Finalization of the electronic system schematics, board layout and component placement and ordering of the PCBs.</h2>
+                        <span class="meta white">Posted by David Beckett on February 16, 2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <!-- Add stuff below here -->
+                    <h2 class="section-heading">Schematics</h2>
+                    <p>The below schematic shows the power control circuitry. It consists of the 2 pairs of lithium ion batteries, the lithium ion charger, the 5V boost converter and the 3.3V LDO voltage regulator. A power switch was added to the enable pin of the boost convertor, this will shut off the 5V output to power off the circuitry.</p>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4/PowerControlSchematic.jpg" alt="">
+                    </a>
+                    <p>The below schematic shows the different sensors and actuators present in the system. It shows the three HCSR04 ultrasonic sensors, the two Sharp IR sensors, the two vibration modules and finally the two control switches. The two SP3T switches have the three output terminals connected to the three nodes of a voltage divider to provide three distinct readings to the analog input.  </p>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4//SensorsSchematics.jpg" alt="">
+                    </a>
+                    <p>The below schematic shows the IMU, a seperate 3.3V voltage regulator is used to isolate the control voltage for the IMU which helps isolate the the power for this circuitry. </p>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4/IMUSchematic.jpg" alt="">
+                    </a>
+                    <p>The final schematic below shwos the MCU, this schematic was created referencing the schematic for the STM Nucleo dev boards. The header P5 is used for connecting the programmer/debugger to the board. </p>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4/MCUSchematic.jpg" alt="">
+                    </a>
+                    <h2 class="section-heading">PCB Layout</h2>
+                    <p>The below two images show the 2D and 3D layout of thr boards. This shows with all of the components and all of the traces routed on the board. the ultrasonic sensor sit slightly off the board so that other surface mount components are placed underneath.</p>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4/BoardLayout2D.jpg" alt="">
+                    </a>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4/BoardLayout3D.jpg" alt="">
+                    </a>
+                    <h2 class="section-heading">Board Manufacturing</h2>
+                    <!-- Add stuff above here -->
+                    <p>The finalized PCBs were ordered from OSHPark. The image below shows the simulated board from OSHPark.</p>
+                    <a href="">
+                        <img class="img-responsive" src="img/postdb4/PurpleBoards.png" alt="">
+                    </a>
+                    <p>OSHPark was kind enough to provide us with a coupon to cover the costs of manufacturing the PCBs. We are ver grateful for the assistance they provided. The image below links to their webpage where boards can be submitted and ordered.</p>
+                    <a href="https://oshpark.com/">
+                        <img class="img-responsive" src="img/postdb4/oshparkLogo.svg" alt="">
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p class="copyright text-muted">Copyright &copy; OculAid 2021</p>
+                    <div style="text-align: center;"><a class="copyright text-muted" href="img/about/tenor.gif" style="color: transparent; background-color: transparent;">F-R-A-N-K-Y F-O-R-E-V-E-R</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>

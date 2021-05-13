@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>OculAid - Blog Post</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/post-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <!-- Update The following three lines to match what was put in the index file. -->
+                        <h1>Software Bring-up and Drivers</h1>
+                        <h2 class="subheading">Infrastructure setup and component level driver development.</h2>
+                        <span class="meta">Posted by <a>Jaskaran Basson</a> on January 27, 2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <!-- Add stuff below here -->
+                    <h2 class="section-heading">Infrastructure Setup</h2>
+                    <p>
+                        Prior to any development, the first thing required for the Software was to setup the infrastructure for compiling, testing and programming the application. This includes bringing in the low-level drivers for the STM32F401RE microcontroller (MCU) that we are using.
+                        Ideally, we would start from a blank project and one-by-one import each driver our system requires. However, due to time constraints, we have decided to use Mbed OS for our application, which includes all drivers for a set of supported MCUs.
+                        The con of this solution is the increase in the flash size of our application, but it is acceptable given the time saved. A benefit of Mbed OS is its integrated unit testing framework, which makes use of GoogleTest, 
+                        a C++ test framework that our team is experienced and comfortable with. Our goal is to have 100% unit test coverage.
+                    </p>
+
+                    <h2 class="section-heading">Infared Sensor Characterization</h2>
+                    <p>
+                        The first step in developing the infared (IR) sensor driver was to characterize its behaviour. The following is the a curve of the sensor's output voltage as the distance to an object varies, as reported by the datasheet.
+                    </p>   
+                    <a>
+                        <img class="img-responsive" src="img/postjb1/ir_datasheet_distance_vs_voltage.png" alt="">
+                        <figcaption><a href="https://www.pololu.com/file/0J85/gp2y0a21yk0f.pdf">https://www.pololu.com/file/0J85/gp2y0a21yk0f.pdf</a></figcaption>
+                    </a>
+                    <p>
+                        However, sensors typically have variances associated with them that lead to slightly different behaviour than the theoretical. To determine each sensor's actual relationship between object distance and output voltage, the sensor was fixed to a flat surface, 
+                        perpendicular to the ground. There were markings placed on a flat surface slightly under the sensor, every 10 cm from 10 to 80 cm, as shown in the following image.
+                    </p>
+                    <a>
+                        <img class="img-responsive" src="img/postjb1/ir_characterization_setup.jpg" alt="">
+                    </a>
+                    <p>
+                        Using the data gathered from this experiment, a power fit relationship was determined : y = a*x^b, where y is output voltage (16-bit ADC value), x is distance (mm), and a and b are constants. 
+                    </p>
+                    
+                    <h2 class="section-heading">Drivers</h2>
+                    <p>
+                        Drivers for the IR sensor, ultrasonic sensor, IMU and vibration motor were developed and unit tested to 100% unit test coverage.
+                        This provides us with a base for the project and components that can be integrated into our higher-level code. As mentioned above, we are using Mbed OS, which provides the low-level drivers for the MCU and the OS level functionality.
+                        The drivers developed by us for each component fall within the ECU block. Now, we can start development on the APP (Application) layer, consisting of the sensor fusion and master logic.
+                    </p>   
+                    <a>
+                        <img class="img-responsive" src="img/postjb1/software_architecture.png" alt="">
+                    </a>
+                    
+                    <!-- Add stuff above here -->
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <!-- <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul> -->
+                    <p class="copyright text-muted">Copyright &copy; OculAid 2021</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
